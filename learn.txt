@@ -1,0 +1,26 @@
+user model 
+    fullname 
+    password
+    cart
+    isadmin
+    orders
+    contact no.
+    pitcure
+Owner model 
+    fullname 
+    password
+    cart
+    isadmin
+    orders
+    contact no.
+    pitcure
+    
+Product
+    Image of Product
+    Name
+    Price
+    Discount
+    Desc.
+    bgColor
+    Panal color 
+    text color
