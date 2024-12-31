@@ -14,7 +14,7 @@ Owner model
     orders
     contact no.
     pitcure
-    
+
 Product
     Image of Product
     Name
@@ -24,3 +24,11 @@ Product
     bgColor
     Panal color 
     text color
+
+
+
+for debugging install debug
+
+for ENV install dotenv and then require it in code
+
+Can use Joy or other validateor to check validation of data

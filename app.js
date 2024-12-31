@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const db = require('./configs/mongoose-connect');
+const db = require('./config/mongoose-connect');
 const ownersRouter = require('./routes/ownersRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter');
@@ -13,7 +13,6 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
 app.set("view engine","ejs")
-
 
 
 
