@@ -3,13 +3,12 @@ const mongoose = require('mongoose');
 mongoose.connect("mongodb://127.0.0.1:27017/buzzbuy")
 
 const userSchema = mongoose.Schema({
-    fullname : String,
-    password : String,
-    email: String,
-    cart:{type:Array, default:[]},
-    isadmin: Boolean,
-    orders:{type:Array, default:[]},
-    contact:Number,
+    fullname :{type:String , required:[true,"Fullname Required"]},
+   password:{type:String , required:[true,"Fullname Required"]},
+    email :{type:String , required:[true,"Fullname Required"] , unique:[true,"Email already Used"]},
+    cart:[{type:mongoose.Schema.Types.ObjectId, ref:"product"}],
+    orders:[{type:mongoose.Schema.Types.ObjectId, ref:"orders"}],
+    contact:{type:Number, require:[true,"Full name reqiore"]},
     picture:String
 })
  module.exports = mongoose.model("user",userSchema)

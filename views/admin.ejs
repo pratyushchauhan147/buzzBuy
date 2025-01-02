@@ -1,0 +1,43 @@
+<%- include('./partials/header') %>
+    <div class="w-full h-screen flex items-start px-20 py-20">
+        <div class="w-[25%] flex h-screen flex-col items-start">
+            <div class="flex flex-col">
+                <a class=" text-xl block w-fit mb-2" href="">All Products</a>
+                <a class=" text-xl block w-fit mb-2" href="/owner/create">Create new product</a>
+            </div>
+        </div>
+        <div class="w-[85%] flex flex-col gap-5 h-screen">
+            <div class="flex items-start gap-5 flex-wrap">
+                <% products.forEach(function(product){ %>
+                    <div class="w-60 border-2 border-transparent hover:border-black-100  ">
+                        <div class="w-full h-52 flex items-center justify-center bg-<%= product.bgcolor %>" >
+                          
+                            <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                                alt="">
+                        </div>
+                        <div
+                            class="flex justify-between bg-<%= product.panelcolor %> items-center px-4 py-4 text-<%= product.textcolor %>">
+                            <div>
+                                <h3>
+                                    <%= product.name %>
+                                </h3>
+                                <h4>₹ <%= product.price %>
+                                </h4>
+                            </div>
+                            <a class="w-7 h-7 flex items-center justify-center text-black rounded-full bg-white" href="">
+                                <i class="ri-add-line"></i>
+                            </a>
+                        </div>
+
+                        <form method="post" class="w-full" action="/products/delete/<%= product._id %> ">
+                       
+                        <input  class="flex w-full justify-center rounded-md hover:bg-red-500 border-2 border-red-500 m-1 border-solid  items-center px-4 py-4 text-black" type="submit" value="delete">
+                    </form>
+
+
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/footer') %>

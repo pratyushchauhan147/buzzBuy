@@ -1,14 +1,14 @@
-const mongoose = require('mongoose'));
+const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
-    name : String,
+    name : {type:String, required:[true,"Name required"]},
     desc : String,
     color:String,
     bgcolor:String,
     panelcolor:String,
     textcolor:String,
-    price:Number,
+    price:{type:Number, required:[true,"Price required"]},
     disount:{type:Number,default:0},
-    image:String
+    image:Buffer
 })
- module.exports = mongoose.model("user",productSchema)
+ module.exports = mongoose.model("product",productSchema)

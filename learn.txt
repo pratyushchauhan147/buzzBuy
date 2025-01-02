@@ -30,5 +30,8 @@ Product
 for debugging install debug
 
 for ENV install dotenv and then require it in code
+install express-session and connect-flash
+        - with flash we can create something on one route and then redirect to other route and still can access it
+Can use Joi or other validateor to check validation of data
 
-Can use Joy or other validateor to check validation of data
+Use Multer for file upload
