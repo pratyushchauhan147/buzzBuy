@@ -6,13 +6,16 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 const userModel = require('../models/user-model');
 const orderModel = require('../models/order-model');
 
+
+
 router.get("/",(req,res)=>{s
     res.send("hey User")
 })
 
+//Register
 router.post("/register",registerUser)
 
-
+//login
 router.post("/login",loginUser)
 router.get("/logout",(req,res)=>{
     res.clearCookie("token")
@@ -20,6 +23,15 @@ router.get("/logout",(req,res)=>{
     res.redirect("/")
 })
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//                                                     CART ROUTES FOR USER
+//
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Get Cart Items
 router.get('/cart',isLoggedIn,async(req,res)=>{
 
     let user = await userModel.findOne({email:req.user.email}).populate("cart")
@@ -38,7 +50,7 @@ router.get('/cart',isLoggedIn,async(req,res)=>{
 })
 
 
-
+//Delete Cart Item
 router.post("/cart/delete/:id",isLoggedIn,async(req,res)=>{
     let user = await userModel.findOne({email:req.user.email})
     let itemid = req.params.id
@@ -58,16 +70,19 @@ router.post("/cart/delete/:id",isLoggedIn,async(req,res)=>{
 
 })
 
-
-
+//Place order 
 router.post('/cart/order',isLoggedIn,async(req,res)=>{
 
-    let user = await userModel.findOne({email:req.user.email}).populate("cart")
+    
+   
     let message = req.flash('message')
     let error = req.flash('error')
-
+    let nettotal = 0
+    let totaldiscount =0;
+    let user = await userModel.findOne({email:req.user.email}).populate("cart")
     console.log(user.cart.length)
-    
+    try{
+       
     user.cart.forEach(pro => {
       pro.total =pro.price+ 20 - pro.disount
       totaldiscount +=pro.disount
@@ -75,10 +90,23 @@ router.post('/cart/order',isLoggedIn,async(req,res)=>{
         
     });
 
-    let order = orderModel.create({})
-
-    res.render("cart",{message:message,error:error,user:user,nettotal,totaldiscount})
+    let order = await orderModel.create({
+        user:req.user._id,
+        products:user.cart,
+        price:nettotal,
+        discount:totaldiscount
+    })
+    user.cart = [];
+    user.orders.push(order)
+    await user.save
+    req.flash("message","Order Successfull")
+}catch(error)
+{
+    req.flash("error","Something went Wrong")
+}
+    res.render("/users/orders")
 })
+
 
 
 

@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
    password:{type:String , required:[true,"Fullname Required"]},
     email :{type:String , required:[true,"Fullname Required"] , unique:[true,"Email already Used"]},
     cart:[{type:mongoose.Schema.Types.ObjectId, ref:"product"}],
-    orders:[{type:mongoose.Schema.Types.ObjectId, ref:"orders"}],
+    order:[{type:mongoose.Schema.Types.ObjectId, ref:"order"}],
     contact:{type:Number, require:[true,"Full name reqiore"]},
     picture:String
 })
