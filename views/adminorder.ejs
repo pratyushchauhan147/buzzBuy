@@ -1,0 +1,110 @@
+<%- include('./partials/header') %>
+
+
+<% if(error.length>0){ %>
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+    <% } %>
+
+    <% if(message.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-green-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= message %>
+            </span>
+        </div>
+        <% } %>
+
+
+            
+      
+
+<div class="w-full h-screen flex items-start px-20 py-20">
+    <div class="w-[25%] flex h-screen flex-col items-start">
+        <div class="flex flex-col">
+            <a class="block w-fit mb-2 text-zinc-500" href="/shop">Back to Shop</a>
+            <a class=" text-xl text-blue-400 block w-fit mb-2" href="/owner/admin">All Products</a>
+            <a class=" text-xl block w-fit mb-2" href="/owner/create">Create new product</a>
+            <a class=" text-xl block w-fit mb-2" href="/owner/orders">Placed Orders</a>
+        </div>
+    </div>
+    <div class="w-full h-screen flex flex-col justify-around items-start px-20 py-20 gap-10 ">
+
+        
+        <% if (orders == undefined || orders.length ===0  ) { %>
+            <h1 class="text-xl text-center w-full">You Dont Have Any Orders</h1>
+            
+       <%  } else { %>
+        <% orders.reverse().forEach(order => { %>
+
+            <% 
+                var status_color =(order.status.toLowerCase() ==='delivered')?status_color ="bg-green-400 ":"bg-yellow-400 text-zinc-700" 
+                var order_color = (order.payment.toLowerCase() ==='paid' && order.status.toLowerCase() ==='delivered') ? "bg-zinc-200  ":"bg-white "
+                var pay_color = (order.payment.toLowerCase() ==='paid') ? "bg-green-400 ":"bg-red-400 "
+            
+            %>
+            <% const date = order.date;
+            const options = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const formattedDate = date.toLocaleString('en-US', options).replace(',', '');
+             %>
+
+
+             <div class="w-full flex items-center justify-around <%= order_color %>   flex-row p-3  border-solid border-2 ">
+                <div class="flex-col w-10/12">
+                <div class=" infos flex mt-2 tracking-tight text-xl w-3/4 gap-10">
+                    <h4 class="">Order no.</h4>
+                    <h4><%= order._id %></h4>
+                </div>
+
+                <div class=" infos flex mt-2 tracking-tight text-xl w-3/4 gap-10">
+                    <h4 class="">User Name</h4>
+                    <h4><%= order.user.fullname %></h4>
+                </div>
+                
+                 <div class="flex text-xl mt-2 w-2/3  gap-10 ">
+                    <h4 class="tracking-tight">Date and Time</h4>
+                    <h4><%= formattedDate %></h4>
+                </div>
+                <div class="flex text-xl tracking-tight mt-2 w-2/3  gap-10 ">
+                    <h4 class="">No. of items</h4>
+                    <h4><%= order.itemcount %></h4>
+                </div>
+               
+
+             </div>
+                
+             <form class="flex flex-row gap-2" method="post" action="orderupdate/<%= order._id %>">
+                <div class="flex flex-row h-1/3 justify-center <%=status_color %> items-center p-2 ">
+                    <h1 class="box  p-3  ">Status: </h1>
+                    <input class="w-2/3 p- flex text-center " type="text" name="status" value="<%= order.status %>" id="">
+                </div>
+
+                <div class="flex flex-row  h-1/3 justify-center <%=pay_color %> items-center p-2 ">
+                    <h1 class="box  p-3  ">Payment: </h1>
+                    <input class="w-1/3 p-2 flex text-center " type="text" value="<%= order.payment %>" name="payment" v>
+                </div>
+                <input class="bg-blue-500 rounded-lg p-3 text-white" type="submit" value="update">
+                
+             </form>
+             <form method="post" action="ordercancel/<%= order._id %>">
+             <input class="bg-red-500 rounded-lg p-3 text-white" type="submit" value="Cancel">
+            </form>
+
+
+            
+
+
+            </div>
+               
+            
+        
+        
+<% }); %>
+<%   } %>
+    </div>
+
+    
+   
+    <%- include('./partials/footer') %>

@@ -5,6 +5,7 @@ const {registerUser,loginUser} = require('../controller/AuthController');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const userModel = require('../models/user-model');
 const orderModel = require('../models/order-model');
+const send_mail = require('../utils/sendmail');
 
 
 
@@ -77,6 +78,7 @@ router.post('/cart/order',isLoggedIn,async(req,res)=>{
     let nettotal = 0
     let totaldiscount =0;
     let user = await userModel.findOne({email:req.user.email}).populate("cart")
+    
     console.log(user.cart.length)
     try{
        
@@ -94,12 +96,20 @@ router.post('/cart/order',isLoggedIn,async(req,res)=>{
         discount:totaldiscount,
         itemcount:user.cart.length
     })
+    let items =[]
+    user.cart.forEach(item => {
+        items.push(item.name)
+        
+    });
+    let mgs = `Your order ID is ${order._id} \n items list : ${items.toString()}  \n Placed at ${order.date}`
     user.cart =[]
     
     user.order.push(order)
-    console.log(user.cart.order)
+       
     await user.save()
-    req.flash("message","Order Successfull")
+
+    send_mail(user.email,"Your Order is Placed !",mgs)
+    req.flash("message","Order Successfull, Mail Sent")
 }catch(error)
 {
     req.flash("error",error.message)
