@@ -19,7 +19,7 @@ module.exports.registerUser =  function(req,res){
 
                          let token = generateToken(newuser)
                          res.cookie("token",token)
-                         res.send({newuser,token})
+                         res.redirect("/shop")
 
                         
                    

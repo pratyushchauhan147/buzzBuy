@@ -21,13 +21,15 @@
             
       
 
-<div class="w-full h-screen flex items-start px-10 py-10">
-        <div class=" flex h-screen flex-col items-start">
+<div class="w-full h-screen flex items-start px-10 py-20">
+        <div class=" flex h-screen flex-col w-1/5 items-start">
             <div class="flex items-center gap-2">
                 
             </div>
             <div class="flex flex-col mt-20">
-                <a class="block w-fit mb-2" href="/shop">Back to Shop</a>
+                <a class="block w-fit mb-2 text-zinc-500" href="/shop">Back to Shop</a>
+                <a class="block text-xl w-fit mb-2" href="/users/cart">My Cart</a>
+                <a class="block text-xl w-fit mb-2" href="/orders">My Orders</a>
 
             </div>
             
@@ -35,60 +37,46 @@
     <div class="w-3/4 h-screen flex flex-col justify-around items-start px-20 py-20 gap-10 ">
 
         
-        <% if (user.orders == undefined || user.orders.length ===0  ) { %>
+        <% if (user.order == undefined || user.order.length ===0  ) { %>
             <h1 class="text-xl text-center w-full">You Dont Have Any Orders</h1>
             
        <%  } else { %>
-        <% user.orders.forEach(product => { %>
-                <div class=" flex w-full justify-between">
-            <div class="w-60   ">
-                <div class="w-full  h-52 flex items-center justify-center bg-<%= product.bgcolor %>" >
-                  
-                    <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
-                        alt="">
+        <% user.order.forEach(order => { %>
+             <div class="w-full flex items-center justify-around   flex-row p-3  border-solid border-2 ">
+                <div class="flex-col w-2/3">
+                <div class=" infos flex mt-2 text-xl w-2/3 gap-10">
+                    <h4 class="">Order no.</h4>
+                    <h4><%= order._id %></h4>
                 </div>
-                <div
-                    class="flex justify-center bg-<%= product.panelcolor %> items-center px-4 py-4 text-<%= product.textcolor %>">
-                    <div>
-                        <h3 class="  text-xl">
-                            <%= product.name %>
-                        </h3>
-                        
-                    </div>
-                    
+                <% const date = order.date;
+                const options = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+                const formattedDate = date.toLocaleString('en-US', options).replace(',', '');
+                 %>
+                 <div class="flex text-xl mt-2 w-2/3  gap-10 ">
+                    <h4 class="">Date and Time</h4>
+                    <h4><%= formattedDate %></h4>
                 </div>
-            </div>
+                <div class="flex text-xl mt-2 w-2/3  gap-10 ">
+                    <h4 class="">No. of items</h4>
+                    <h4><%= order.itemcount %></h4>
+                </div>
+               
 
-            <div class="w-1/2  p-2 flex flex-col  ">
-                <div class="px-10 mt-5 text-xl ">
-                    <div class="flex mt-2">
-                        <h4 class="w-2/3">Price </h4>
-                        <h4>₹ <%= product.price %></h4>
-                    </div>
-                    <div class="flex mt-2">
-                        <h4 class="w-2/3">Discount</h4>
-                        <h4>₹ <%= product.disount %></h4>
-                    </div>
-                    <div class="flex mt-2">
-                        <h4 class="w-2/3">Shipping</h4>
-                        <h4>FREE</h4>
-                    </div>
-                    
+             </div>
+
+                <div class="flex flex-col  h-1/2 justify-center bg-zinc-300 items-center ">
+                    <h1 class="box  p-3  ">Status: <%= order.status %></h1>
                 </div>
-                <div class="w-full h-[1px] bg-black mt-10"></div>
-                <div class="flex mt-5">
-                    <h3 class="w-2/3 text-bold text-xl">Total Amount</h3>
-                    <h3 class="font-semibold text-xl text-green-600"><%= product.price - product.disount %></h3>
+
+                <div class="flex flex-col  h-1/2 justify-center bg-zinc-200 items-center ">
+                    <h1 class="box  p-3  ">Payment: <%= order.payment %></h1>
                 </div>
+
+
+            
+
 
             </div>
-            <form method="post" class="w-1/5" action="/users/cart/delete/<%= product._id %> ">
-                       
-                <input  class="h-full w-2/5 font-medium bg-red-400 text-white hover:bg-red-500 border-2 border-transparent hover:border-solid px-4" type="submit" value="Delete">
-            </form>
-        </div>
-
-                
                
             
         
@@ -99,28 +87,7 @@
 
     <div class="items fixed top-20 right-0 h-3/4 gap-5 m-4  border-5  flex  w-1/4">
     
-        <div class="info  rounded-md p-3 flex-col w-full ">
-
-
-        <h3 class="text-2xl">Summary</h3>
-        <div class="px-10 mt-5 text-xl ">
-            <div class="flex mt-2">
-                <h4 class="w-2/3">Net Discount </h4>
-                <h4>₹ </h4>
-            </div>
-            <div class="flex mt-2">
-                <h4 class="w-2/3">Shipping Fee</h4>
-                <h4>FREE</h4>
-            </div>
-        </div>
-        <div class="w-full h-[1px] bg-black mt-10"></div>
-        <div class="flex mt-5">
-            <h3 class="w-2/3 text-bold text-xl"> Net Total Amount</h3>
-            <h3 class="font-semibold text-xl text-green-600"></h3>
-        </div>
-
-    
-    </div>
+        
     </div>
    
     <%- include('./partials/footer') %>

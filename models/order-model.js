@@ -6,8 +6,9 @@ const orderSchema = mongoose.Schema({
     products:[{type:mongoose.Schema.Types.ObjectId , ref:'product'}],
     price:{type:Number, required:[true,"Price required"]},
     discount:{type:Number,default:0},
-    status:{type:String,default:"ordered"},
-    payement:{type:String,default:"unpaid"},
+    itemcount:{type:Number,default:0},
+    status:{type:String,default:"Ordered"},
+    payment:{type:String,default:"Unpaid"},
 
 })
  module.exports = mongoose.model("order",orderSchema)

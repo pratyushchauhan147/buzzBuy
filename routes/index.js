@@ -43,4 +43,13 @@ router.get('/orders',isLoggedIn,async(req,res)=>{
     res.render("orders",{message:message,error:error,user:user})
 })
 
+router.get('/account',isLoggedIn,async(req,res)=>{
+
+    let user = await userModel.findOne({email:req.user.email})
+    let message = req.flash('message')
+    let error = req.flash('error')
+    res.render("account",{message:message,error:error,user:user})
+})
+
+
 module.exports = router

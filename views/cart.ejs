@@ -21,17 +21,19 @@
             
       
 
-<div class="w-full h-screen flex items-start px-10 py-10">
-        <div class=" flex h-screen flex-col items-start">
-            <div class="flex items-center gap-2">
-                
-            </div>
-            <div class="flex flex-col mt-20">
-                <a class="block w-fit mb-2" href="/shop">Back to Shop</a>
-
-            </div>
+<div class="w-full h-screen flex items-start px-10 py-20">
+    <div class=" flex h-screen flex-col w-1/5 items-start">
+        <div class="flex items-center gap-2">
             
         </div>
+        <div class="flex flex-col mt-20">
+            <a class="block w-fit mb-2 text-zinc-500" href="/shop">Back to Shop</a>
+            <a class="block text-xl w-fit mb-2" href="/users/cart">My Cart</a>
+            <a class="block text-xl w-fit mb-2" href="/orders">My Orders</a>
+
+        </div>
+        
+    </div>
     <div class="w-3/4 h-screen flex flex-col justify-around items-start px-20 py-20 gap-10 ">
 
         
@@ -118,6 +120,10 @@
             <h3 class="w-2/3 text-bold text-xl"> Net Total Amount</h3>
             <h3 class="font-semibold text-xl text-green-600"><%= nettotal %></h3>
         </div>
+        <form method="post" class=" flex justify-center p-2 m-2 h-1/6 text-2xl  w-full" action="/users/cart/order">          
+            <input  class=" w-full h-full  font-medium bg-yellow-400 text-white font-semibold hover:bg-yellow-500 border-2 border-transparent hover:border-solid px-4" type="submit" value="Order">
+        </form>
+
 
     
     </div>

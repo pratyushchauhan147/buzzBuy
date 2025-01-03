@@ -71,10 +71,7 @@ router.post("/cart/delete/:id",isLoggedIn,async(req,res)=>{
 })
 
 //Place order 
-router.post('/cart/order',isLoggedIn,async(req,res)=>{
-
-    
-   
+router.post('/cart/order',isLoggedIn,async(req,res)=>{ 
     let message = req.flash('message')
     let error = req.flash('error')
     let nettotal = 0
@@ -94,17 +91,20 @@ router.post('/cart/order',isLoggedIn,async(req,res)=>{
         user:req.user._id,
         products:user.cart,
         price:nettotal,
-        discount:totaldiscount
+        discount:totaldiscount,
+        itemcount:user.cart.length
     })
-    user.cart = [];
-    user.orders.push(order)
-    await user.save
+    user.cart =[]
+    
+    user.order.push(order)
+    console.log(user.cart.order)
+    await user.save()
     req.flash("message","Order Successfull")
 }catch(error)
 {
-    req.flash("error","Something went Wrong")
+    req.flash("error",error.message)
 }
-    res.render("/users/orders")
+    res.redirect("/orders")
 })
 
 
