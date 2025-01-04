@@ -80,6 +80,10 @@ router.post('/cart/order',isLoggedIn,async(req,res)=>{
     let user = await userModel.findOne({email:req.user.email}).populate("cart")
     
     console.log(user.cart.length)
+    if(user.cart.length ===0)
+    {  req.flash("error","Nothing in Cart")
+       return res.redirect("/shop")
+     }
     try{
        
     user.cart.forEach(pro => {

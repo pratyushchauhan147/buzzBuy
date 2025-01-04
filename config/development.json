@@ -1,3 +1,4 @@
 {
-    "MONGODB_URI":"mongodb://127.0.0.1:27017"
+    "MONGODB_URI1":"mongodb://127.0.0.1:27017",
+    "MONGODB_URI2":"mongodb+srv://pratyushchauhan147code:8XCPbT6hznobRWul@buzzbuyc1.dcdu5.mongodb.net/?retryWrites=true&w=majority&appName=buzzbuyC1"
 }

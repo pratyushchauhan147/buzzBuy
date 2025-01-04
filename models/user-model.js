@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://127.0.0.1:27017/buzzbuy")
+
 
 const userSchema = mongoose.Schema({
     fullname :{type:String , required:[true,"Fullname Required"]},

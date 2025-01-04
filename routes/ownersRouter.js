@@ -55,6 +55,10 @@ router.get('/orders',isOwner,async(req,res)=>{
     res.render("adminorder",{message:message,error:error,orders})
 })
 
+
+
+
+
 router.post('/orderupdate/:id',isOwner,async(req,res)=>{
 
     

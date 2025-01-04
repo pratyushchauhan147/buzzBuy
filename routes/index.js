@@ -43,6 +43,15 @@ router.get('/orders',isLoggedIn,async(req,res)=>{
     res.render("orders",{message:message,error:error,user:user})
 })
 
+router.get('/order/:id',isLoggedIn,async(req,res)=>{
+
+    
+    let order = await orderModel.findOne({_id:req.params.id}).populate('user').populate('products')
+    let message = req.flash('message')
+    let error = req.flash('error')
+    res.render("vieworder",{message:message,error:error,order})
+})
+
 router.get('/account',isLoggedIn,async(req,res)=>{
 
     let user = await userModel.findOne({email:req.user.email})

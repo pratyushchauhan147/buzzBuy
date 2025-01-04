@@ -1,0 +1,99 @@
+<%- include('./partials/header') %>
+
+
+<% if(error.length>0){ %>
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+    <% } %>
+
+    <% if(message.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-green-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= message %>
+            </span>
+        </div>
+        <% } %>
+
+
+            
+      
+
+<div class="w-full h-screen flex items-start px-10 py-20">
+    <div class=" flex h-screen flex-col w-1/5 items-start">
+        <div class="flex items-center gap-2">
+            
+        </div>
+        <div class="flex flex-col mt-20">
+            <a class="block w-fit mb-2 text-zinc-500" href="/shop">Back to Shop</a>
+        </div>
+        
+    </div>
+    <div class="w-3/5 h-screen flex flex-col justify-around items-start  gap-10 ">
+
+        
+        <% if (order.products.length ===0) { %>
+            <h1 class="text-xl text-center w-full">You Dont Have Anything In Cart</h1>
+            
+       <%  } else { %>
+        <% order.products.forEach(product => { %>
+                <div class=" flex w-full justify-between">
+            <div class="w-60   ">
+                <div class="w-full  h-52 flex items-center justify-center bg-<%= product.bgcolor %>" >
+                  
+                    <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                        alt="">
+                </div>
+                <div
+                    class="flex justify-center bg-<%= product.panelcolor %> items-center px-4 py-4 text-<%= product.textcolor %>">
+                    <div>
+                        <h3 class="  text-xl">
+                            <%= product.name %>
+                        </h3>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="w-1/2  p-2 flex flex-col  ">
+                <div class="px-10 mt-5 text-xl ">
+                    <div class="flex mt-2">
+                        <h4 class="w-2/3">Price </h4>
+                        <h4>₹ <%= product.price %></h4>
+                    </div>
+                    <div class="flex mt-2">
+                        <h4 class="w-2/3">Discount</h4>
+                        <h4>₹ <%= product.disount %></h4>
+                    </div>
+                    <div class="flex mt-2">
+                        <h4 class="w-2/3">Shipping</h4>
+                        <h4>FREE</h4>
+                    </div>
+                    
+                </div>
+                <div class="w-full h-[1px] bg-black mt-10"></div>
+                <div class="flex mt-5">
+                    <h3 class="w-2/3 text-bold text-xl">Total Amount</h3>
+                    <h3 class="font-semibold text-xl text-green-600"><%= product.price - product.disount %></h3>
+                </div>
+
+            </div>
+            
+        </div>
+
+                
+               
+            
+        
+        
+<% }); %>
+<%   } %>
+    </div>
+
+   
+    </div>
+   
+    <%- include('./partials/footer') %>

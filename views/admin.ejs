@@ -11,7 +11,7 @@
         <div class="w-[85%] flex flex-col gap-5 h-screen">
             <div class="flex items-start gap-5 flex-wrap">
                 <% products.forEach(function(product){ %>
-                    <div class="w-60 border-2 border-transparent hover:border-black-100  ">
+                    <div class="w-60 border-2 border-transparent items-center flex-col justify-center hover:border-black-100  ">
                         <div class="w-full h-52 flex items-center justify-center bg-<%= product.bgcolor %>" >
                           
                             <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
@@ -31,9 +31,9 @@
                             </a>
                         </div>
 
-                        <form method="post" class="w-full" action="/products/delete/<%= product._id %> ">
+                        <form method="post" class="w-full items-center" action="/products/delete/<%= product._id %> ">
                        
-                        <input  class="flex w-full justify-center rounded-md hover:bg-red-500 border-2 border-red-500 m-1 border-solid  items-center px-4 py-4 text-black" type="submit" value="delete">
+                        <input  class="flex w-full justify-center rounded-md hover:bg-red-500 border-2 border-red-500 mt-1 border-solid  items-center px-4 py-4 text-black" type="submit" value="delete">
                     </form>
 
 
