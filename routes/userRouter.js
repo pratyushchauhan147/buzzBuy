@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const {registerUser,loginUser} = require('../controller/AuthController');
-
+const upload = require('../config/multer-config');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const userModel = require('../models/user-model');
 const orderModel = require('../models/order-model');
@@ -9,7 +9,7 @@ const send_mail = require('../utils/sendmail');
 
 
 
-router.get("/",(req,res)=>{s
+router.get("/",(req,res)=>{
     res.send("hey User")
 })
 
@@ -18,6 +18,36 @@ router.post("/register",registerUser)
 
 //login
 router.post("/login",loginUser)
+
+router.post("/updateuser", upload.single("profilePic"), isLoggedIn, async (req, res) => {
+    try {
+        let user = await userModel.findOne({ email: req.user.email });
+        let {fullname,contact,address,city} = req.body
+        if(isNaN(contact))
+        {
+            req.flash("error", "Enter Valid Information")
+             return res.redirect("/account");
+        }
+        user.fullname = fullname;
+        user.contact = contact;
+        user.address = address;
+        user.city = city
+        if (req.file && req.file.buffer) {
+            user.picture =req.file.buffer 
+        }
+        await user.save()
+      
+        req.flash("message","Profile Updated ")
+    } catch (error) {
+        req.flash("error", error.message);
+        console.log(error);}
+        res.redirect("/account");
+});
+
+
+
+
+
 router.get("/logout",(req,res)=>{
     res.clearCookie("token")
     req.flash("error","You Are Logged Out")

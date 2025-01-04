@@ -35,3 +35,6 @@ install express-session and connect-flash
 Can use Joi or other validateor to check validation of data
 
 Use Multer for file upload
+
+<img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                        alt="">

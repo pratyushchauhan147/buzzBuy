@@ -73,14 +73,14 @@ router.post('/orderupdate/:id',isOwner,async(req,res)=>{
 router.post('/ordercancel/:id',isOwner,async(req,res)=>{
 
     
-    let {status,payment} = req.body
+    console.log("hi")
     let mgs = `Your order ID is ${req.params.id} is CANCELLED by the Owner at ${Date.now()}`
     let Ouser = await orderModel.findOne({_id:req.params.id}).populate('user')
     let orders = await orderModel.findOneAndDelete({_id:req.params.id})
     send_mail(Ouser.user.email,"Order Cancelled",mgs)
     let message = req.flash('message',"Order Cancelled")
     let error = req.flash('error')
-    res.redirect("/owner/orders")
+    res.redirect("/owners/orders")
 })
 
 

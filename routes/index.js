@@ -5,10 +5,10 @@ const productModel = require('../models/product-model');
 const userModel = require('../models/user-model');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const orderModel = require('../models/order-model');
-router.get('/',(req,res)=>{
+router.get('/',isLoggedIn,(req,res)=>{
     let message = req.flash('message')
     let error = req.flash('error')
-    res.render("index",{message:message,error:error,loggedin:false})
+    res.redirect("/shop")
 })
 router.get('/shop',isLoggedIn,async(req,res)=>{
 
@@ -17,6 +17,20 @@ router.get('/shop',isLoggedIn,async(req,res)=>{
     let error = req.flash('error')
     res.render("shop",{message:message,error:error,products:products})
 })
+
+router.get('/loginpage',async(req,res)=>{
+
+    let message = req.flash('message')
+    let error = req.flash('error')
+    res.render("loginpage",{message:message,error:error,loggedin:false})
+})
+router.get('/signuppage',async(req,res)=>{
+
+    let message = req.flash('message')
+    let error = req.flash('error')
+    res.render("signup",{message:message,error:error,loggedin:false})
+})
+
 
 
 

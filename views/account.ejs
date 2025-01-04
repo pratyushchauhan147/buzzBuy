@@ -1,18 +1,81 @@
+
 <%- include('./partials/header') %>
-    <div class="w-full h-screen flex items-start px-10 py-20">
-        <div class=" flex h-screen flex-col w-1/5 items-start">
-            <div class="flex items-center gap-2">
-                
-            </div>
-            <div class="flex flex-col mt-20">
-                <a class="block w-fit mb-2 text-zinc-500" href="/shop">Back to Shop</a>
-                <a class="block text-xl w-fit mb-2" href="/users/cart">My Cart</a>
-                <a class="block text-xl w-fit mb-2" href="/orders">My Orders</a>
 
-            </div>
-            
-        </div>
 
-        <div class="w-3/5">hi</div>
+<% if(error.length>0){ %>
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
     </div>
-    <%- include('./partials/footer') %>
+    <% } %>
+
+    <% if(message.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-green-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= message %>
+            </span>
+        </div>
+        <% } %>
+
+
+    
+
+<div class="w-full h-screen flex items-start px-20 py-20">
+    <%- include('./partials/sidenavuser') %>
+    <div class="w-3/5">
+        <form id="user-form" action="/users/updateuser" method="POST" enctype="multipart/form-data">
+            <div class="flex items-center gap-2">
+                <% if (user.picture) { %>
+                    <img src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>" alt="Profile Picture" class="w-3/12 h-3/12 rounded-full" id="profilePicPreview">
+                <% } else { %>
+                    <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center" id="profilePicPreview">
+                        <span>No Image</span>
+                    </div>
+                <% } %>
+               
+                
+                <input name="fullname" type="text" value="<%= user.fullname %>" class="text-3xl capitalize w-fit mb-2" id="user-fullName" disabled>
+            </div>
+            <div class="flex flex-col mt-5 ">
+                <label for="profilePicInput" class="hidden" id="profilePicLabel">Upload Image</label>
+                <input name="profilePic" type="file" class="hidden" id="profilePicInput" accept="image/*" disabled>
+                <div class="flex flex-row gap-4 items-center">
+                    <h1 class="tracking-tight mb-2 p-2 text-xl">Email</h1>
+                    <h1 name="email" class="tracking-tight w-2/4  mb-2 p-2 text-xl"><%= user.email %></h1>
+                    <h1 class="tracking-tight mb-2 p-2 text-xl">Phone No.</h1>
+                    <input name="contact" type="text" value="<%= user.contact %>" class="tracking-tight  p-2 mb-2 text-xl text-zinc-500" id="user-contacts" disabled>
+                </div>
+                <div class="flex flex-row mt-2 gap-5 items-center">
+                    <h1 class="tracking-tight mb-2 p-2 text-xl">City</h1>
+                    <input name="city" type="text" value="<%= user.city %>" class="tracking-tight capitalize    p-2 mb-2 text-xl text-zinc-500" id="user-city" disabled>
+                    <h1 class="tracking-tight mb-2 p-2 text-xl">Address</h1>
+                    <textarea name="address" class="tracking-tight w-1/2 align-top rounded-md border-2 border-solid    p-2 mb-2 text-xl text-zinc-500" id="user-address" disabled><%= user.address %></textarea>
+                </div>
+            </div>
+            <button type="button" onclick="toggleEditMode()" class="mt-4 px-4 py-2 bg-blue-500 text-white">Edit</button>
+            <button type="button" id="backBtn" class="mt-4 px-4 py-2 bg-gray-500 text-white hidden" onclick="window.location.reload()">Back</button>
+            <button type="submit" id="saveBtn" class="mt-4 px-4 py-2 bg-green-500 text-white hidden">Save</button>
+        </form>
+    </div>
+</div>
+<%- include('./partials/footer') %>
+
+<script>
+function toggleEditMode() {
+    const inputs = document.querySelectorAll('#user-fullName, #user-contacts, #user-address, #profilePicInput,#user-city');
+    inputs.forEach(input => {
+        input.disabled = !input.disabled;
+    });
+    
+    // Show profile picture input when editing
+    document.querySelector('#profilePicInput').classList.toggle('hidden');
+    document.querySelector('#profilePicLabel').classList.toggle('hidden');
+
+    // Toggle button visibility
+    document.querySelector('#backBtn').classList.toggle('hidden');
+    document.querySelector('#saveBtn').classList.toggle('hidden');
+    const editButton = document.querySelector('button[onclick="toggleEditMode()"]');
+    editButton.classList.toggle('hidden');
+}
+</script>

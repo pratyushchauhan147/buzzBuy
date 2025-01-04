@@ -22,6 +22,13 @@
                 <a class="text-red-600" href="/users/logout">Logout</a>
             </div>
             
-        <%} %>
+        <%} else { %>
+       
+            <div class="flex gap-5  ">
+                <a class="bg-blue-500 p-2 px-4 text-white rounded-md flex justify-center w-3/4" href="/loginpage">Login</a>
+                <a class="bg-blue-500 p-2 text-white rounded-md flex justify-center w-3/4" href="/signuppage">Register</a>
+                
+            </div>
+            <% } %>
       
     </nav>
