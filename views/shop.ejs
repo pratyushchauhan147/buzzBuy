@@ -15,26 +15,22 @@
     </span>
 </div>
 <% } %>
-<div class="w-full min-h-screen flex flex-col md:flex-row px-5 md:px-20 py-5 md:py-20">
+
+<div class="w-full min-h-screen flex flex-col md:flex-row mt-20 sm:mt-32 px-5 md:px-20 py-5 md:py-20">
     <div class="w-full md:w-1/4 flex flex-col items-start mb-10 md:mb-0">
         <div class="flex items-center gap-2 mb-5">
-            <h3>Sort by</h3>
-            <form action="/shop">
-                <select class="border-[1px] px-2 py-1" name="sortby" id="">
-                    <option value="popular">Popular</option>
-                    <option value="newest">Newest</option>
-                </select>
+            <p>Sort by</p>
+            <form id="sortForm" action="/shop">
+                <select class="border-[1px] px-2 py-1" name="sortby" id="sortSelect">
+                    <option value="none" <%= sortBy === 'none' ? 'selected' : '' %>>None</option>
+                    <option value="disount" <%= sortBy === 'disount' ? 'selected' : '' %>>Discount</option>
+                     <option value="price" <%= sortBy === 'price' ? 'selected' : '' %>>Price</option>
+                 </select>
             </form>
         </div>
         <div class="flex flex-col gap-2">
-            <a class="block mb-2" href="">New Collection</a>
-            <a class="block mb-2" href="">All Products</a>
-            <a class="block mb-2" href="">Discounted Products</a>
-        </div>
-        <div class="mt-10 md:mt-32">
-            <a class="block mb-2" href="">Filter by :</a>
-            <a class="block mb-2" href="">Availability</a>
-            <a class="block mb-2" href="">Discount</a>
+            <a class="block mb-2" href="/shop?discounted=false">All Products</a>
+            <a class="block mb-2" href="/shop?discounted=true">Discounted Products</a>
         </div>
     </div>
     <div class="w-full md:w-3/4 flex flex-col gap-5">
@@ -48,11 +44,8 @@
                         </div>
                         <div class="flex justify-between bg-<%= product.panelcolor %> items-center px-4 py-4 text-<%= product.textcolor %>">
                             <div>
-                                <h3>
-                                    <%= product.name %>
-                                </h3>
-                                <h4>₹ <%= product.price %>
-                                </h4>
+                                <h3><%= product.name %></h3>
+                                <h4>₹ <%= product.price %> <span class="text-zinc-200"><%= product.disount > 0 ? product.disount+"/- off" :"" %></span></h4>
                             </div>
                             <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="/addtocart/<%= product._id %>">
                                 <i class=" text-black ri-add-line"></i>
@@ -65,3 +58,8 @@
     </div>
 </div>
 <%- include('./partials/footer') %>
+<script>
+    document.getElementById('sortSelect').addEventListener('change', function() {
+        document.getElementById('sortForm').submit();
+    });
+</script>

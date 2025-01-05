@@ -10,13 +10,24 @@ router.get('/',isLoggedIn,(req,res)=>{
     let error = req.flash('error')
     res.redirect("/shop")
 })
-router.get('/shop',isLoggedIn,async(req,res)=>{
+router.get('/shop', isLoggedIn, async (req, res) => {
+    let sortBy = req.query.sortby || 'price'; // Default sorting by price
+    let discounted = req.query.discounted === 'true'; // Check if only discounted products should be shown
 
-    let products = await productModel.find()
-    let message = req.flash('message')
-    let error = req.flash('error')
-    res.render("shop",{message:message,error:error,products:products})
-})
+    let sortOptions = {};
+    sortOptions[sortBy] = sortBy=== 'disount'? -1:1 ; 
+
+    let query = discounted ? { disount: { $gt: 0 } } : {};
+    let products = await productModel.find(query).sort(sortOptions);
+    
+   
+    let message = req.flash('message');
+    let error = req.flash('error');
+
+    // Pass sortBy and discounted to the template
+    res.render("shop", { message: message, error: error, products: products, sortBy: sortBy, discounted: discounted });
+});
+
 
 router.get('/loginpage',async(req,res)=>{
 

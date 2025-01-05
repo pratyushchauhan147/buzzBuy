@@ -15,7 +15,7 @@ router.get("/",(req,res)=>{
 })
 
 if(process.env.NODE_ENV === 'development')
-    router.post("/create", async(req,res)=>{
+    router.post("/createowner", isOwner ,async(req,res)=>{
 
         let owner = await ownerModel.find();
         if(owner.length >0)
