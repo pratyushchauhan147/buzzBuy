@@ -1,3 +1,50 @@
+
+
 </body>
+<footer class="bg-gray-100 text-zinc-800 px-20 py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-2xl font-semibold">Contact Us</h2>
+                <p class="mt-4">Feel free to reach out to us with any questions or comments!</p>
+                <form action="/contact" method="POST" class="mt-4">
+                    <div class="mb-4">
+                        <label for="name" class="block mb-2">Name:</label>
+                        <input type="text" id="name" name="cname" required class="w-full p-2 rounded-md text-gray-800">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block mb-2">Email:</label>
+                        <input type="email" id="email" name="cemail" required class="w-full p-2 rounded-md text-gray-800">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block mb-2">Message:</label>
+                        <textarea id="message" name="cmessage" rows="4" required class="w-full p-2 rounded-md text-gray-800"></textarea>
+                    </div>
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md">Send</button>
+                </form>
+            </div>
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-2xl font-semibold">Follow Us</h2>
+                <p class="mt-4">Stay connected through our social media channels:</p>
+                <ul class="mt-4">
+                    <li><a href="https://leetcode.com/u/pratyushchauhan/" class="hover:underline">Leetcode</a></li>
+                    <li><a href="https://github.com/pratyushchauhan147" class="hover:underline">GitHub</a></li>
+                    <li><a href="https://www.instagram.com/cybertech_pratyush/" class="hover:underline">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/in/pratyush-chauhan-5245b722b/" class="hover:underline">LinkedIn</a></li>
+                </ul>
+            </div>
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-2xl font-semibold">Address</h2>
+                <p class="mt-4">1234 AI Street,<br>Innovative City, IC 56789</p>
+                <p class="mt-4">Email: info@buzzbuy.com</p>
+                <p class="mt-4">Phone: +123 456 7890</p>
+            </div>
+        </div>
+        <div class="mt-8 text-center">
+            <p class="text-sm">&copy; 2025 BuzzBuy by Pratyush Chauhan. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
 
 </html>

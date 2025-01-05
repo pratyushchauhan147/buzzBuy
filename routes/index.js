@@ -5,6 +5,9 @@ const productModel = require('../models/product-model');
 const userModel = require('../models/user-model');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const orderModel = require('../models/order-model');
+const send_mail = require('../utils/sendmail');
+const dotenv = require('dotenv').config();
+
 router.get('/',isLoggedIn,(req,res)=>{
     let message = req.flash('message')
     let error = req.flash('error')
@@ -89,6 +92,16 @@ router.get('/account',isLoggedIn,async(req,res)=>{
     let message = req.flash('message')
     let error = req.flash('error')
     res.render("account",{message:message,error:error,user:user})
+})
+
+router.post('/contact',async(req,res)=>{
+    let {cname,cemail,cmessage} =req.body
+    let subje ="BuzzBuy Message from"+cname+" !"
+    let mgs = `You Got a Mesage on BuzzBuy  From: \n\n ${cname} \n ${cemail} \n\n message: \n\n ${cmessage} `
+    send_mail(process.env.MEMAIL,subje,mgs)
+    let message = req.flash('message')
+    let error = req.flash('error')
+    res.redirect('/shop')
 })
 
 
