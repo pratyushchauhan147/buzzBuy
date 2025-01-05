@@ -1,0 +1,93 @@
+<%- include('./partials/header') %>
+
+<div class="w-full min-h-screen flex flex-col md:mt-12 mt-24 p-5 sm:mt-32">
+    <div class="w-full h-full py-10 flex flex-col justify-center items-center">
+        <h1 class="text-3xl text-zinc-700 font-semibold text-center p-2">About This Project</h1>
+        <p class="text-xl text-zinc-500 w-2/3 text-center">
+            Welcome to <span class="text-blue-400 font-semibold">BuzzBuy</span>, where technology meets creativity.
+            Our website offers a unique collection of <span class="text-zinc-600 font-semibold">AI-generated paintings</span> that blend the precision of algorithms
+            with the beauty of artistic expression. Each piece is a one-of-a-kind masterpiece, created through a
+            harmonious collaboration between man and machine.
+        </p>
+        <a class="p-4 bg-green-400 rounded-md w-1/5 m-3 text-xl text-white flex justify-center items-center text-center" href="/signuppage">Shop Now</a>
+    </div>
+    
+
+    <div class="w-full h-full py-10 flex flex-col justify-center items-center">
+        <h1 class="text-3xl text-zinc-700 font-semibold text-center p-2">Features of This Project</h1>
+        <p class="text-xl text-zinc-500 w-2/3 mb-10 text-center">
+            This project is designed for both <span class="text-zinc-600 font-semibold">users</span> and <span class="text-zinc-600 font-semibold">shopkeepers</span>, divided into three parts.
+        </p>
+    
+        <div class="w-full flex flex-col md:flex-row justify-around h-full">
+            <div class="block w-full md:w-1/4 h-[400px] flex-col justify-start p-5 rounded-md border-2 border-solid mb-5 md:mb-0">
+                <h1 class="text-3xl text-zinc-700 font-semibold mb-4">Authentication</h1>
+                <p class="text-xl text-zinc-500 w-full">
+                    This project offers <span class="text-zinc-600 font-semibold">authentication</span> for both users and owners, using basic token-based
+                    authentication. Features include login, logout, and registration, allowing individual user records
+                    and data to be stored.
+                </p>
+                <h1 class="text-xl text-zinc-700 mt-6 w-2/3">Try it Out</h1>
+                <div class="flex w-full mt-5 text-white">
+                    <a class="p-3 font-semibold bg-blue-500 mr-5 rounded-md w-1/2 md:w-1/3 flex justify-center" href="/loginpage">LOGIN</a>
+                    <a class="p-3 font-semibold bg-blue-400 rounded-md w-1/2 md:w-1/3 flex justify-center" href="/signuppage">REGISTER</a>
+                </div>
+            </div>
+
+            <div class="block w-full md:w-1/4 h-[400px] flex-col justify-start p-5 rounded-md border-2 border-solid mb-5 md:mb-0">
+                <h1 class="text-3xl text-zinc-700 font-semibold mb-4">Features for Customers</h1>
+                <p class="text-xl text-zinc-500 w-full">
+                    Customers can <span class="text-zinc-600 font-semibold">order paintings</span> by adding them to the cart. After adding products, they can check the
+                    cart page and place orders. All orders will be displayed on the order page with their status.
+                </p>
+                <h1 class="text-xl text-zinc-700 mt-6 w-2/3">Try it Out</h1>
+                <div class="flex w-full mt-5 text-white">
+                    <a class="p-3 bg-[#feb046] font-semibold mr-5 rounded-md w-1/2 md:w-1/3 flex justify-center" href="/user/cart">MY CART</a>
+                    <a class="p-3 bg-[#f93d11] font-semibold rounded-md w-1/2 md:w-1/3 flex justify-center" href="/orders">ORDERS</a>
+                </div>
+            </div>
+
+            <div class="block w-full md:w-1/4 h-[400px] flex-col justify-start p-5 rounded-md border-2 border-solid">
+                <h1 class="text-3xl text-zinc-700 font-semibold mb-4">Features for Admins</h1>
+                <p class="text-xl text-zinc-500 w-full">
+                    Admins can access the <span class="text-zinc-600 font-semibold">admin pages</span> to add or delete products, view orders, <span class="text-blue-400">update orders</span> statuses,
+                    and <span class="text-red-400">cancel orders</span>. They have full authority to manage the store.
+                </p>
+                <h1 class="text-xl text-zinc-700 mt-6 w-2/3">Try it Out</h1>
+                <div class="flex w-full mt-5 text-white">
+                    <a class="p-3 bg-zinc-700 font-semibold mr-5 rounded-md w-1/2 md:w-1/3 flex justify-center" href="/owner/admin">ADMIN</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-around">
+        <div class="flex flex-col w-full md:w-2/3">
+            <div class="w-full h-full py-10 flex flex-col justify-center pl-0 md:pl-20">
+                <h1 class="text-3xl text-zinc-700 font-semibold py-4">How Do I Communicate With Users?</h1>
+                <p class="text-xl text-zinc-500 w-full md:w-2/3">
+                    This application uses <span class="text-zinc-600 font-semibold">email services</span> to send confirmation mails when a user places an order and cancellation mails when the owner cancels an order. Users can also <span class="text-zinc-600 font-semibold">contact us</span> using the contact us section in the footer.
+                </p>
+            </div>
+            <div class="w-full h-full py-10 flex flex-col justify-center pl-0 md:pl-20">
+                <h1 class="text-3xl text-zinc-700 font-semibold py-4">What are the Technologies Used?</h1>
+                <p class="text-xl text-zinc-500 w-full md:w-2/3">
+                    This application is based on <span class="text-zinc-600 font-semibold">JavaScript</span> where <span class="text-zinc-600 font-semibold">Node.js</span> with <span class="text-zinc-600 font-semibold">Express.js framework</span> is used for the backend. <span class="text-zinc-600 font-semibold">Mongoose</span> along with <span class="text-zinc-600 font-semibold">MongoDB</span> is used for the database, accessed through MongoDB Cloud. Embedded JavaScript is used for the frontend with some styling using <span class="text-zinc-600 font-semibold">Tailwind CSS</span>.
+                </p>
+            </div>
+        </div>
+        <div class="w-full md:w-1/3 flex-col justify-center items-center object-cover mr-0 md:mr-20 hidden md:block">
+            <img class="w-full h-full" src="tech.png" alt="Technologies Used">
+        </div>
+    </div>
+
+    <div class="w-full h-full py-10 flex flex-col justify-center items-center">
+        <h1 class="text-3xl text-zinc-700 font-semibold text-center p-2">About Me, The Developer</h1>
+        <p class="text-xl text-zinc-500 w-2/3 text-center">
+            I am <span class="text-zinc-600 font-semibold">Pratyush Chauhan</span>, a Computer Engineering student and a <span class="text-zinc-600 font-semibold">Web Developer</span>. This is one of my projects that I created to practice the technologies used in it. I thrive in collaborative environments and have demonstrated leadership and teamwork skills through multiple projects. I am eager to leverage my technical expertise and creativity to contribute to innovative web development projects in the tech industry.
+        </p>
+        <img class="p-5 md:w-1/5 w-1/2 :block" src="mypic.png" alt="Pratyush Chauhan">
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
