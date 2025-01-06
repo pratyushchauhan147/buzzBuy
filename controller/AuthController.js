@@ -7,14 +7,14 @@ module.exports.registerUser =  function(req,res){
     
     try 
     {
-        let {fullname,password,email} = req.body
+        let {fullname,password,email,city,address,contact} = req.body
 
         bcrypt.genSalt(10,(err,salt)=>{
             bcrypt.hash(password,salt,async(err,result)=>{
                 if(err) return res.send(err.message);
                 else{
                    
-                        let newuser = await userModel.create({fullname,password:result,email})
+                        let newuser = await userModel.create({fullname,password:result,email,city,address,contact})
                        
 
                          let token = generateToken(newuser)
@@ -28,7 +28,11 @@ module.exports.registerUser =  function(req,res){
             })
         })  
     } 
-    catch (error) {res.send(error.message)}
+    catch (error) {
+        req.flash("error",error.message)
+        res.redirect("/signuppage")
+
+    }
 
     }
 
