@@ -6,8 +6,8 @@ const expressSession = require('express-session');
 const flash = require('connect-flash');
 
 
-const db = require('./config/mongoose-connect');
-//const db = require('./config/mongoose-atlas-connect');
+//const db = require('./config/mongoose-connect');
+const db = require('./config/mongoose-atlas-connect');
 const ownersRouter = require('./routes/ownersRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter');
