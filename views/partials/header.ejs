@@ -9,6 +9,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="font-['helvetica_now_display']">
+    <div id="overlay" class="hidden fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+        <div class="text-xl text-gray-700">Loading...</div>
+    </div>
+    
     <nav class="w-full fixed top-0 left-0 px-5 py-3 flex flex-col  sm:flex-row bg-white justify-between">
         
         <% var loggedin = typeof loggedin !== "undefined" ? loggedin : true %>
@@ -33,3 +37,4 @@
     </nav>
 </body>
 </html>
+

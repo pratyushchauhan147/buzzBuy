@@ -17,7 +17,7 @@ router.get('/',isLoggedIn,(req,res)=>{
 router.get('/about',(req,res)=>{
     let message = req.flash('message')
     let error = req.flash('error')
-    res.render("about")
+    res.render("about",{message: message, error: error})
 })
 router.get('/shop', isLoggedIn, async (req, res) => {
     let sortBy = req.query.sortby || 'price'; // Default sorting by price

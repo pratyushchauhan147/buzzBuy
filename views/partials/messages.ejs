@@ -1,0 +1,36 @@
+<% if(error.length>0){ %>
+    <div id="error-message" class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-red-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= error %>
+        </span>
+    </div>
+    <% } %>
+    
+    <% if(message.length>0){ %>
+    <div id="success-message" class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-green-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= message %>
+        </span>
+    </div>
+    <% } %> 
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide error message after 3 seconds
+            const errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        
+            // Hide success message after 3 seconds
+            const successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+        </script>
+        

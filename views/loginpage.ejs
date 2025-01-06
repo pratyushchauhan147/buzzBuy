@@ -1,20 +1,6 @@
 <%- include('./partials/header') %>
 
-<% if(error.length>0){ %>
-<div class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-red-500">
-    <span class="inline-block mt-1 mb-1 text-white">
-        <%= error %>
-    </span>
-</div>
-<% } %>
-
-<% if(message.length>0){ %>
-<div class="absolute top-5 left-1/2 -translate-x-1/2 p-3 rounded-md bg-green-500">
-    <span class="inline-block mt-1 mb-1 text-white">
-        <%= message %>
-    </span>
-</div>
-<% } %>    
+<%- include('./partials/messages') %>    
 <div class="w-full min-h-screen flex flex-col md:flex-row px-5 md:px-20">
     
     <div class="w-full md:w-2/5 flex items-center justify-center min-h-screen">
@@ -36,3 +22,4 @@
     </div>
 </div>
 <%- include('./partials/footer') %>
+<%- include('./partials/loading') %>

@@ -1,0 +1,30 @@
+
+<div id="overlay" class="hidden fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
+    <div class="text-xl text-gray-700">Loading...</div>
+</div>
+<script>
+    function showLoading() {
+        document.getElementById('overlay').classList.remove('hidden');
+    }
+
+    function hideLoading() {
+        document.getElementById('overlay').classList.add('hidden');
+    }
+
+    // Show loading when any form is submitted
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            showLoading();
+        });
+    });
+
+    // Show loading when any anchor tag is clicked
+    document.querySelectorAll('a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            showLoading();
+        });
+    });
+
+ 
+</script>
+    
