@@ -9,10 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app.js"
+      "dest": "/app.js"
     }
   ],
-  "env": {
-    "EXPRESS_SESSION_KEY": "@express_session_key"
-  }
 }
