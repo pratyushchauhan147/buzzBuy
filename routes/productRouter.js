@@ -25,7 +25,7 @@ try{
         textcolor,
     
     })
-    let success = req.flash("success","yes successs")
+    let success = req.flash("success","Product Created ")
     res.redirect("/owner/create")
 }catch(error)
 {
